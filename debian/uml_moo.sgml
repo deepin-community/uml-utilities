@@ -1,0 +1,121 @@
+<!doctype refentry PUBLIC "-//OASIS//DTD DocBook V4.1//EN" [
+
+<!-- Process this file with docbook-to-man to generate an nroff manual
+     page: `docbook-to-man manpage.sgml > manpage.1'.  You may view
+     the manual page with: `docbook-to-man manpage.sgml | nroff -man |
+     less'.  A typical entry in a Makefile or Makefile.am is:
+
+manpage.1: manpage.sgml
+	docbook-to-man $< > $@
+  -->
+
+  <!-- Fill in your name for FIRSTNAME and SURNAME. -->
+  <!ENTITY dhfirstname "<firstname>Matt</firstname>">
+  <!ENTITY dhsurname   "<surname>Zimmerman</surname>">
+  <!-- Please adjust the date whenever revising the manpage. -->
+  <!ENTITY dhdate      "<date>December  5, 2001</date>">
+  <!-- SECTION should be 1-8, maybe w/ subsection other parameters are
+       allowed: see man(7), man(1). -->
+  <!ENTITY dhsection   "<manvolnum>1</manvolnum>">
+  <!ENTITY dhemail     "<email>mdz@debian.org</email>">
+  <!ENTITY dhusername  "Matt Zimmerman">
+  <!ENTITY dhucpackage "<refentrytitle>UML_MOO</refentrytitle>">
+  <!ENTITY dhpackage   "uml_moo">
+
+  <!ENTITY debian      "<productname>Debian GNU/Linux</productname>">
+  <!ENTITY gnu         "<acronym>GNU</acronym>">
+]>
+
+<refentry>
+  <refentryinfo>
+    <address>
+      &dhemail;
+    </address>
+    <author>
+      &dhfirstname;
+      &dhsurname;
+    </author>
+    <copyright>
+      <year>2001</year>
+      <holder>&dhusername;</holder>
+    </copyright>
+    &dhdate;
+  </refentryinfo>
+  <refmeta>
+    &dhucpackage;
+
+    &dhsection;
+  </refmeta>
+  <refnamediv>
+    <refname>&dhpackage;</refname>
+
+    <refpurpose>merge a COW file with its backing file</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <cmdsynopsis>
+      <command>&dhpackage;</command>
+
+      <arg><replaceable>COW file</replaceable></arg>
+
+      <arg><replaceable>new_backing_file</replaceable></arg>
+    </cmdsynopsis>
+  </refsynopsisdiv>
+  <refsect1>
+    <title>DESCRIPTION</title>
+
+    <para>This manual page documents briefly the
+      <command>&dhpackage;</command> command.</para>
+
+    <para>This manual page was written for the &debian; distribution
+      because the original program does not have a manual page.
+      Instead, it has documentation in HTML format; see below.</para>
+
+    <para><command>&dhpackage;</command> is a program to merge a COW
+    (copy-on-write) file with its backing file, and write the result
+    to a new backing file.  This can be used periodically to update
+    the backing file with the changes made in the COW file.</para>
+
+    <para>NOTE: you can save a lot of disk space using COW files.
+    When checking the size of the COW file in order to see the gobs
+    of space that you're saving, make sure you use 'ls -ls' to see the actual
+    disk consumption rather than the length of the file. The COW file is
+    sparse, so the length will be very different from the disk usage.</para>
+
+  </refsect1>
+
+  <refsect1>
+    <title>SEE ALSO</title>
+
+    <para>The <ulink
+    url="http://user-mode-linux.sourceforge.net/UserModeLinux-HOWTO.html"
+    type=alternate>UserModeLinux-HOWTO</ulink></para>
+  </refsect1>
+  <refsect1>
+    <title>AUTHOR</title>
+
+    <para>&dhpackage; was written by RidgeRun,Inc
+    <email>glonnon@ridgerun.com</email></para>
+
+    <para>This manual page was written by &dhusername; &dhemail; for
+      the &debian; system, based on material in the
+      UserModeLinux-HOWTO by Rusty Russell.</para>
+
+  </refsect1>
+</refentry>
+
+<!-- Keep this comment at the end of the file
+Local variables:
+mode: sgml
+sgml-omittag:t
+sgml-shorttag:t
+sgml-minimize-attributes:nil
+sgml-always-quote-attributes:t
+sgml-indent-step:2
+sgml-indent-data:t
+sgml-parent-document:nil
+sgml-default-dtd-file:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+-->

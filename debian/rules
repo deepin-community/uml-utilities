@@ -1,4 +1,88 @@
 #!/usr/bin/make -f
+# Sample debian/rules that uses debhelper.
+# GNU copyright 1997 to 1999 by Joey Hess.
 
-%:
-	dh $@
+# Uncomment this to turn on verbose mode.
+#export DH_VERBOSE=1
+
+# This is the debhelper compatability version to use.
+export DEB_BUILD_ARCH?=$(shell dpkg-architecture -qDEB_BUILD_ARCH)
+
+tmp:=$(CURDIR)/debian/uml-utilities
+
+configure: configure-stamp
+configure-stamp:
+	dh_testdir
+	touch configure-stamp
+
+build: configure-stamp build-arch build-indep
+build-arch: build-stamp
+build-indep: build-stamp
+build-stamp:
+	dh_prep
+	dh_testdir
+
+ifeq "$(DEB_BUILD_ARCH)" "arm"
+	touch tunctl/tunctl
+endif
+	$(MAKE)
+
+	for man in debian/*.sgml; do \
+		docbook-to-man $$man > `dirname $$man`/`basename $$man .sgml`.1; \
+	done
+
+	touch build-stamp
+
+clean:
+	dh_testdir
+	dh_testroot
+	rm -f build-stamp configure-stamp
+
+	$(MAKE) clean
+	rm -f debian/*.1
+
+	dh_clean
+
+install: build
+	dh_testdir
+	dh_testroot
+
+	$(MAKE) install DESTDIR=$(tmp)
+
+	dh_installdirs etc/network/if-up.d etc/network/if-pre-up.d
+	install -m 755 debian/uml-utilities.if-up.d $(tmp)/etc/network/if-up.d/uml-utilities
+	install -m 755 debian/uml-utilities.if-pre-up.d $(tmp)/etc/network/if-pre-up.d/uml-utilities
+
+ifeq "$(DEB_BUILD_ARCH)" "arm"
+	rm -f $(tmp)/usr/bin/tunctl
+endif
+
+# Build architecture-independent files here.
+binary-indep: build install
+
+# Build architecture-dependent files here.
+binary-arch: build install
+	dh_testdir -a
+	dh_testroot -a
+#	dh_installdebconf -a
+	dh_installdocs -a
+	dh_installexamples -a
+#	dh_installmenu -a
+#	dh_installlogrotate -a
+	dh_installinit -a
+	dh_installman -a debian/*.1
+	dh_installinfo -a
+#	dh_undocumented
+	dh_installchangelogs -a
+	dh_link -a
+	dh_strip -a
+	dh_compress -a
+	dh_fixperms -a
+	dh_installdeb -a
+	dh_shlibdeps -a
+	dh_gencontrol -a
+	dh_md5sums -a
+	dh_builddeb -a
+
+binary: binary-indep binary-arch
+.PHONY: build clean binary-indep binary-arch binary install configure

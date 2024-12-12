@@ -1,5 +1,525 @@
-template-repository (1.0-1) unstable; urgency=medium
+uml-utilities (20070815.4-1) unstable; urgency=medium
 
-  * Initial release
+  [ New Maintenance Release ]
+  * Unpatch tunctl-setgroup
+  * Direct apply patch tunctl-setgroup
+  * Delete obsolete patches. Not used anymore
+  * Fix URL to Vcs-Browser
 
- -- Tsic404 <liuheng@deepin.org>  Sat, 28 Jan 2023 13:46:49 +0800
+ -- Ritesh Raj Sarraf <rrs@debian.org>  Mon, 02 Mar 2020 19:50:13 +0530
+
+uml-utilities (20070815.3-1) unstable; urgency=medium
+
+  [ New Maintenance Release ]
+  * Drop Mattia Dongili from Uploaders list (Closes: #933155)
+  * Use standard path for libray installation. (Closes: #928924)
+
+ -- Ritesh Raj Sarraf <rrs@debian.org>  Thu, 09 Jan 2020 16:50:07 +0530
+
+uml-utilities (20070815.2-1) unstable; urgency=medium
+
+  [ New Maintenance Release ]
+  * Don't delete uml_util.spec in clean target
+  * Allow creation of tun IFF_TUN devices
+  * Don't link against ncurses
+  * Cleanup and re-add debian/ work
+  * Fix debian/gbp.conf
+  * Fix reference to makedev (Closes: #916171)
+
+ -- Ritesh Raj Sarraf <rrs@debian.org>  Thu, 27 Dec 2018 19:31:55 +0530
+
+uml-utilities (20070815.1-3) unstable; urgency=medium
+
+  * Switch packaging repository to Salsa
+  * Switch Maintainer email address (Closes: #899717)
+  * Use tracker as maintainer email address
+
+ -- Ritesh Raj Sarraf <rrs@debian.org>  Tue, 12 Jun 2018 10:10:31 +0545
+
+uml-utilities (20070815.1-2) unstable; urgency=medium
+
+  * Fix path of tunctl invocation.
+    Thanks to Allen Chan (Closes: #834458)
+  * Add Vcs and Homepage fields
+  * Add debian/gbp.conf
+  * Update uploaders list and add myself to it
+
+ -- Ritesh Raj Sarraf <rrs@debian.org>  Tue, 16 Aug 2016 21:14:59 +0530
+
+uml-utilities (20070815.1-1) unstable; urgency=low
+
+  * Bump compat level to latest. (Closes: #817708)
+  * Stop setting permissions on /dev/net/tun. (Closes: #516691, #760425)
+  * Switch to dpkg-source 3.0 (quilt) format, repackaged orig.tgz to remove
+    garbage like a .pc directory that confuses dpkg-source.
+  * Added support for "status" action to init script. Thanks Peter Eisentraut
+    <petere@debian.org>. (Closes: #646879)
+  * Added support to open TUN devices in TUN mode instead of just TAP. Thanks
+    to Nathaniel Wesley Filardo <nwf@cs.jhu.edu>. (Closes: #462922)
+  * Fix path and permission of uml_net in dpkg-statoverride.
+    (Closes: #501046)
+
+ -- Mattia Dongili <malattia@debian.org>  Wed, 13 Jul 2016 23:03:09 -0700
+
+uml-utilities (20070815-1.4) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Stop shipping /var/run/uml-utilities, thanks to Thomas Goirand. The
+    initscript already created this if it was missing.  (Closes: #689905)
+  * Set Architecture: linux-any.  (Closes: #745188, #637724)
+
+ -- Andreas Beckmann <anbe@debian.org>  Tue, 04 Nov 2014 14:05:53 +0100
+
+uml-utilities (20070815-1.3) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Don't link mconsole with ncurses (closes: #646162). Thanks to Sven Joachim
+    for the bug report and the patch.
+
+ -- Jakub Wilk <jwilk@debian.org>  Wed, 02 Nov 2011 22:35:36 +0100
+
+uml-utilities (20070815-1.2) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Build-depend on libreadline-dev instead of libreadline5-dev
+    (closes: #553868). Thanks to Matthias Klose for the bug report.
+  * Remove Stefano Melchior from uploaders (closes: #514666 ). Thanks to
+    Sandro Tosi for the bug report.
+
+ -- Jakub Wilk <jwilk@debian.org>  Sun, 07 Aug 2011 14:21:01 +0200
+
+uml-utilities (20070815-1.1) unstable; urgency=low
+
+  * Non-maintainer upload.
+  * Fixed dependency information in LSB header in init.d script
+    (closes: #470775)
+
+ -- Peter Eisentraut <petere@debian.org>  Sat, 05 Apr 2008 14:59:53 +0200
+
+uml-utilities (20070815-1) unstable; urgency=low
+
+  * New upstream version (Closes: #438457) (Closes: #393263)
+  [Stefano Melchior]
+    * added the humfsify man page
+    * added the uml_mount man page
+    * updated policy version in debian/control
+    * added correction in the tunctl man page (Closes: #395020)
+    * added LSB support with patch from David Härdeman (Closes: #385906)
+  [Mattia Dongili]:
+    * Remove obsolete MAKEDEV invocation and udev/makedev dependencies
+      (Closes: #434161)
+    * Create /var/run/uml-utilities if it doesn't exist at uml_switch startup
+      (Closes: #434784)
+    * set a decent name for the _maintenance_ team.
+    * add UML_SWITCH_CTL to defaults file for easier customization.
+    * add uml_mkcow and jail_uml manpages.
+    * mention COW files advantages and how to see their actual 
+      disk usage in uml_moo and uml_mkcow manpages. (Closes: #173302)
+
+ -- Mattia Dongili <malattia@debian.org>  Sun, 19 Aug 2007 15:39:38 +0900
+
+uml-utilities (20060323-3) unstable; urgency=low
+
+  [Mattia Dongili]:
+  * Install port-helper in the correct location (Closes: #362058).
+  * Cleaned up debian/rules and merged all install path stuff in a single
+    patch to upstream sources.
+
+ -- Mattia Dongili <malattia@debian.org>  Wed, 12 Apr 2006 22:32:53 +0200
+
+uml-utilities (20060323-2) unstable; urgency=low
+
+  * fix FTBFS on ia64 and alpha (spotted before the bug was delivered).
+
+ -- Mattia Dongili <malattia@debian.org>  Sun, 09 Apr 2006 22:39:15 +0200
+
+uml-utilities (20060323-1) unstable; urgency=low
+
+  [Mattia Dongili]:
+  * moved Stefano Melchior to Uploaders and using pkg-uml-pkgs@l.a.d.o as
+    Maintainer.
+  * added myself and Andreas Schuldei as Uploaders.
+  * uml_router vanished together with the core file in uptream source 
+    package. (Closes: #280392)
+  * remove dpkg-statoverride entry on remove/purge of the package.
+    (Closes: #270680)
+  * provide an option to prevent uml_switch from starting. (Closes: #231265)
+  * some debian/rules cleanup and a non-POSIX shell code fix.
+  * converted changelog to UTF8.
+
+ -- Mattia Dongili <malattia@debian.org>  Sat, 08 Apr 2006 18:58:22 +0200
+ 
+uml-utilities (20060110-1) unstable; urgency=low
+
+  * Fixed libreadline5-dev build dependency (closes: #326287)
+  * Fixed space left on daemon stoping from Loic Minier <lool@dooz.org>> (closes: #236467)
+
+ -- Stefano Melchior <stefano.melchior@openlabs.it>  Wed, 11 Jan 2006 00:25:40 +0100
+
+uml-utilities (20040406-1) unstable; urgency=low
+
+  * New upstream release
+  * Patch from Carlos Perelló Marín to fix uml_proxy_arp with multiple
+    addresses (Closes: #243834)
+
+ -- Matt Zimmerman <mdz@debian.org>  Wed, 14 Apr 2004 17:59:45 -0700
+
+uml-utilities (20040114-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Matt Zimmerman <mdz@debian.org>  Mon, 16 Feb 2004 23:01:35 -0800
+
+uml-utilities (20030903-7) unstable; urgency=low
+
+  * Add a note about using dhcpd to README.Debian
+  * Patch from Clint Adams <schizo@debian.org> to support multiple
+    proxy_arp addresses in /etc/network/interfaces (Closes: #222014)
+
+ -- Matt Zimmerman <mdz@debian.org>  Sun, 11 Jan 2004 22:52:13 -0800
+
+uml-utilities (20030903-6) unstable; urgency=low
+
+  * Documentation improvements to reflect user feedback
+  * Add some comments to interfaces.example explaining how they are used
+  * Add "ifup tap0" in the step-by-step instructions in README.Debian
+  * Clarify the README.Debian to indicate that there are multiple methods
+    of networking being documented
+
+ -- Matt Zimmerman <mdz@debian.org>  Fri, 19 Sep 2003 01:02:23 -0400
+
+uml-utilities (20030903-5) unstable; urgency=low
+
+  * Fix typo in daemon transport instructions in README.Debian
+    (Closes: #209250)
+
+ -- Matt Zimmerman <mdz@debian.org>  Wed, 17 Sep 2003 16:40:08 -0400
+
+uml-utilities (20030903-4) unstable; urgency=low
+
+  * Oops, the switch socket needs to be writable and executable as well.
+    This means the chmod is back.
+
+ -- Matt Zimmerman <mdz@debian.org>  Sat,  6 Sep 2003 12:37:59 -0400
+
+uml-utilities (20030903-3) unstable; urgency=low
+
+  * Don't chgrp/chmod the uml_switch socket.  uml_switch is now a public
+    service to local users and requires no additional privileges.
+    (Closes: #208770)
+  * Add documentation to README.Debian about the uml_switch setup
+
+ -- Matt Zimmerman <mdz@debian.org>  Fri,  5 Sep 2003 20:13:59 -0400
+
+uml-utilities (20030903-2) unstable; urgency=low
+
+  * Use sysconf rather than PAGE_SIZE in uml_mkcow (Closes: #208795)
+
+ -- Matt Zimmerman <mdz@debian.org>  Fri,  5 Sep 2003 13:06:21 -0400
+
+uml-utilities (20030903-1) unstable; urgency=low
+
+  * New upstream release
+  * Update uml_mconsole(1) to document all commands.  Added documentation
+    for cad, sysrq, stop, go and log.
+  * Update init script to match new uml_switch syntax
+
+ -- Matt Zimmerman <mdz@debian.org>  Thu,  4 Sep 2003 16:55:26 -0400
+
+uml-utilities (20030605-5) unstable; urgency=low
+
+  * Tweak interfaces example to use uml-net user, as an example of how to
+    let uml_switch connect to the tap interface
+  * I give up, invoke adduser with --no-create-home.  Why should system
+    users have home directories in /home by default? (Closes: #208351)
+  * Don't let the init script fail if the uml-net user does not exist,
+    since that could have failed in postinst
+
+ -- Matt Zimmerman <mdz@debian.org>  Tue,  2 Sep 2003 19:20:19 -0400
+
+uml-utilities (20030605-4) unstable; urgency=low
+
+  * Update uml_switch man page to include new options -tap, -daemon,
+    -compat-v0
+  * Add an init script which automatically starts up a uml_switch daemon,
+    which will be accessible by all users in the uml-net group
+
+ -- Matt Zimmerman <mdz@debian.org>  Mon,  1 Sep 2003 14:02:30 -0400
+
+uml-utilities (20030605-3) unstable; urgency=medium
+
+  * Depends: makedev (>= 2.3.1-62), as that is when tun support was
+    added (Closes: #204520)
+  * Include if-pre-up.d and if-up.d scripts and example
+    /etc/network/interfaces from Clint Adams <schizo@debian.org>
+    (Closes: #196523)
+
+ -- Matt Zimmerman <mdz@debian.org>  Sat, 16 Aug 2003 16:13:43 -0400
+
+uml-utilities (20030605-2) unstable; urgency=low
+
+  * Add explanation of uml_net location to README.Debian
+  * Depends: adduser (Closes: #201188)
+
+ -- Matt Zimmerman <mdz@debian.org>  Mon, 14 Jul 2003 08:57:33 -0400
+
+uml-utilities (20030605-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Matt Zimmerman <mdz@debian.org>  Sat,  7 Jun 2003 00:06:09 -0400
+
+uml-utilities (20030312-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Matt Zimmerman <mdz@debian.org>  Fri, 14 Mar 2003 21:38:11 -0500
+
+uml-utilities (20030205-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Matt Zimmerman <mdz@debian.org>  Thu,  6 Feb 2003 22:56:55 -0500
+
+uml-utilities (20030202-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Matt Zimmerman <mdz@debian.org>  Sun,  2 Feb 2003 20:25:13 -0500
+
+uml-utilities (20030122-2) unstable; urgency=low
+
+  * Actually create the tun device (changelog error)
+
+ -- Matt Zimmerman <mdz@debian.org>  Tue, 28 Jan 2003 01:13:30 -0500
+
+uml-utilities (20030122-1) unstable; urgency=low
+
+  * New upstream release
+  * Depends on makedev >= 2.3.1-62 and create tun device in postinst
+    (Closes: #174730)
+
+ -- Matt Zimmerman <mdz@debian.org>  Mon, 27 Jan 2003 12:22:19 -0500
+
+uml-utilities (20021102-1) unstable; urgency=low
+
+  * New upstream release
+  * Fixes a data corruption bug in uml_moo
+  * Use getent rather than sg to check for the existence of uml-net
+
+ -- Matt Zimmerman <mdz@debian.org>  Sun,  3 Nov 2002 15:26:21 -0500
+
+uml-utilities (20020906-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Matt Zimmerman <mdz@debian.org>  Sat, 14 Sep 2002 12:01:13 -0400
+
+uml-utilities (20020821-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Matt Zimmerman <mdz@debian.org>  Tue,  3 Sep 2002 16:38:07 -0400
+
+uml-utilities (20020729-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Matt Zimmerman <mdz@debian.org>  Mon, 29 Jul 2002 21:01:57 -0400
+
+uml-utilities (20020718-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Matt Zimmerman <mdz@debian.org>  Thu, 18 Jul 2002 22:51:28 -0400
+
+uml-utilities (20020707-1) unstable; urgency=low
+
+  * New upstream release
+    - Fixes large file handling in uml_moo (Closes: #146395)
+    - Provides a destructive merge option for uml_moo (Closes: #146399)
+
+ -- Matt Zimmerman <mdz@debian.org>  Mon,  8 Jul 2002 19:45:33 -0400
+
+uml-utilities (20020604-1) unstable; urgency=low
+
+  * New upstream release
+  * Includes uml_watchdog
+
+ -- Matt Zimmerman <mdz@debian.org>  Wed,  5 Jun 2002 21:19:20 -0400
+
+uml-utilities (20020521-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Matt Zimmerman <mdz@debian.org>  Tue, 21 May 2002 20:39:40 -0400
+
+uml-utilities (20020428-2) unstable; urgency=low
+
+  * Use #ifdef around use of SA_NOCLDWAIT to allow building on ia64 again
+    (Closes: #145409)
+
+ -- Matt Zimmerman <mdz@debian.org>  Thu,  2 May 2002 16:14:42 -0400
+
+uml-utilities (20020428-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Matt Zimmerman <mdz@debian.org>  Sun, 28 Apr 2002 23:03:05 -0400
+
+uml-utilities (20020427-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Matt Zimmerman <mdz@debian.org>  Sat, 27 Apr 2002 15:46:25 -0400
+
+uml-utilities (20020415-3) unstable; urgency=high
+
+  * Aaarrgghh...forgot to change back to Architecture: any
+
+ -- Matt Zimmerman <mdz@debian.org>  Thu, 25 Apr 2002 22:22:36 -0400
+
+uml-utilities (20020415-2) unstable; urgency=low
+
+  * Hack debian/rules to avoid building or installing tunctl on arm
+    (Closes: #142740)
+
+ -- Matt Zimmerman <mdz@debian.org>  Sun, 21 Apr 2002 23:32:33 -0400
+
+uml-utilities (20020415-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Matt Zimmerman <mdz@debian.org>  Sun, 21 Apr 2002 23:08:20 -0400
+
+uml-utilities (20020410-1) unstable; urgency=low
+
+  * New upstream release
+
+ -- Matt Zimmerman <mdz@debian.org>  Wed, 10 Apr 2002 23:06:38 -0400
+
+uml-utilities (20020407-1) unstable; urgency=low
+
+  * New upstream release
+  * Needed for 2.4.18-15um
+
+ -- Matt Zimmerman <mdz@debian.org>  Tue,  9 Apr 2002 00:47:18 -0400
+
+uml-utilities (20020320-3) unstable; urgency=high
+
+  * Limit architectures to everything except ARM in hopes of getting into
+    testing (and getting user-mode-linux 2.4.18 there).  No other changes
+    whatsoever.
+
+ -- Matt Zimmerman <mdz@debian.org>  Sun,  7 Apr 2002 17:57:08 -0400
+
+uml-utilities (20020320-2) unstable; urgency=low
+
+  * Update tunctl(1) to reflect new syntax (Closes: #140702)
+  * Add README.Debian which briefly explains about access control for
+    virtual networking
+
+ -- Matt Zimmerman <mdz@debian.org>  Tue,  2 Apr 2002 08:55:55 -0500
+
+uml-utilities (20020320-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Matt Zimmerman <mdz@debian.org>  Thu, 21 Mar 2002 22:24:21 -0500
+
+uml-utilities (20020318-1) unstable; urgency=low
+
+  * New upstream release.
+  * The uml_switch protocol has changed, and this version is required for
+    2.4.18-8um
+  * libuml-perl is gone, superseded by the UML test suite tarball which is
+    not packaged yet
+  * Only suggest user-mode-linux (Closes: #137990)
+
+ -- Matt Zimmerman <mdz@debian.org>  Tue, 19 Mar 2002 08:44:43 -0500
+
+uml-utilities (20020212-2) unstable; urgency=low
+
+  * Remove uml_mkdebianfs.  It was a quick hack, and not terribly useful.
+    Instead, use rootstrap, which is now in unstable.  It is much more
+    feature-rich, configurable and extensible.
+  * Removal of uml_mkdebianfs Closes: #134635
+  * Create a group for users authorized to run uml_net as root.  If you
+    want this to be different, use dpkg-statoverride.  (Closes: #136219)
+
+ -- Matt Zimmerman <mdz@debian.org>  Sat,  9 Mar 2002 17:57:41 -0500
+
+uml-utilities (20020212-1) unstable; urgency=low
+
+  * New upstream release.
+  * Includes a new tool, tunctl
+
+ -- Matt Zimmerman <mdz@debian.org>  Tue, 12 Feb 2002 22:59:51 -0500
+
+uml-utilities (20020125-1) unstable; urgency=low
+
+  * New upstream release.
+  * Include my simplistic uml_mkdebianfs script for building Debian root
+    images for UML
+
+ -- Matt Zimmerman <mdz@debian.org>  Fri, 25 Jan 2002 22:20:37 -0500
+
+uml-utilities (20020104-2) unstable; urgency=medium
+
+  * Remove reference to nonexistent uml_net(1) from uml_switch(1)
+  * Only Recommend user-mode-linux, don't depend on it.  This is necessary
+    if we ever want to make it into testing.
+
+ -- Matt Zimmerman <mdz@debian.org>  Mon, 14 Jan 2002 19:05:27 -0500
+
+uml-utilities (20020104-1) unstable; urgency=low
+
+  * New upstream release.
+  * Should now handle version 2 COW files correctly (Closes: #123868)
+
+ -- Matt Zimmerman <mdz@debian.org>  Fri,  4 Jan 2002 20:01:18 -0500
+
+uml-utilities (20011227-1) unstable; urgency=low
+
+  * New upstream release.
+
+ -- Matt Zimmerman <mdz@debian.org>  Sat, 29 Dec 2001 18:35:07 -0500
+
+uml-utilities (20011210-1) unstable; urgency=low
+
+  * New upstream release.
+  * Add depends: libexpect-perl for libuml-perl
+
+ -- Matt Zimmerman <mdz@debian.org>  Wed, 12 Dec 2001 19:18:55 -0500
+
+uml-utilities (20011209-2) unstable; urgency=low
+
+  * Package UML.pm in new binary package libuml-perl
+  * Fix an error in the (Debian-only) security fix to uml_net
+    (Closes: #123643)
+  * Add missing build-dep on libreadline-dev (Closes: #123647)
+
+ -- Matt Zimmerman <mdz@debian.org>  Wed, 12 Dec 2001 18:47:29 -0500
+
+uml-utilities (20011209-1) unstable; urgency=low
+
+  * New upstream release.
+  * Includes security fixes
+
+ -- Matt Zimmerman <mdz@debian.org>  Sun,  9 Dec 2001 19:30:43 -0500
+
+uml-utilities (20011124-2) unstable; urgency=low
+
+  * Apply security fixes to uml_net (also sent upstream)
+  * Ship uml_net setuid root, so that virtual networking works for
+    unprivileged users.  dpkg-statoverride it if you don't want this.
+
+ -- Matt Zimmerman <mdz@debian.org>  Sun,  9 Dec 2001 07:04:39 -0500
+
+uml-utilities (20011124-1) unstable; urgency=low
+
+  * Initial Release.
+
+ -- Matt Zimmerman <mdz@debian.org>  Wed,  5 Dec 2001 07:46:29 -0500
+
+
