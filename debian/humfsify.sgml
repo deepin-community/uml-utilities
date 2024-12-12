@@ -1,0 +1,194 @@
+<!doctype refentry PUBLIC "-//OASIS//DTD DocBook V4.1//EN" [
+
+<!-- Process this file with docbook-to-man to generate an nroff manual
+     page: `docbook-to-man manpage.sgml > manpage.1'.  You may view
+     the manual page with: `docbook-to-man manpage.sgml | nroff -man |
+     less'.  A typical entry in a Makefile or Makefile.am is:
+
+manpage.1: manpage.sgml
+	docbook-to-man $< > $@
+  -->
+
+  <!-- Fill in your name for FIRSTNAME and SURNAME. -->
+  <!ENTITY dhfirstname "<firstname>Stefano</firstname>">
+  <!ENTITY dhsurname   "<surname>Melchior</surname>">
+  <!-- Please adjust the date whenever revising the manpage. -->
+  <!ENTITY dhdate      "<date>October  26, 2006</date>">
+  <!-- SECTION should be 1-8, maybe w/ subsection other parameters are
+       allowed: see man(7), man(1). -->
+  <!ENTITY dhsection   "<manvolnum>1</manvolnum>">
+  <!ENTITY dhemail     "<email>stefano.melchior@openlabs.it</email>">
+  <!ENTITY dhusername  "Stefano Melchior">
+  <!ENTITY dhucpackage "<refentrytitle>HUMFSIFY</refentrytitle>">
+  <!ENTITY dhpackage   "humfsify">
+
+  <!ENTITY debian      "<productname>Debian GNU/Linux</productname>">
+  <!ENTITY gnu         "<acronym>GNU</acronym>">
+]>
+
+<refentry>
+  <refentryinfo>
+    <address>
+      &dhemail;
+    </address>
+    <author>
+      &dhfirstname;
+      &dhsurname;
+    </author>
+    <copyright>
+      <year>2006</year>
+      <holder>&dhusername;</holder>
+    </copyright>
+    &dhdate;
+  </refentryinfo>
+  <refmeta>
+    &dhucpackage;
+
+    &dhsection;
+  </refmeta>
+  <refnamediv>
+    <refname>&dhpackage;</refname>
+
+    <refpurpose>convert a directory to the format needed by the UML
+	humfs file system</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <cmdsynopsis>
+      <command>&dhpackage;</command>
+      <arg>user</arg>
+      <arg>group</arg>
+      <arg>size</arg>
+    </cmdsynopsis>
+  </refsynopsisdiv>
+  <refsect1>
+    <title>DESCRIPTION</title>
+
+    <para>This manual page documents briefly the
+      <command>&dhpackage;</command> command.</para>
+
+    <para>This manual page was written for the &debian; distribution
+      because the original program does not have a manual page.
+      Instead, it has documentation in HTML format; see below.</para>
+
+    <para><command>&dhpackage;</command> is a Perl script necessary to
+	convert a directory to a format expected by the UML humfs file system.
+    </para>
+
+  </refsect1>
+  <refsect1>
+    <title>HISTORY</title>
+	<para>UMLFS was born with the idea to substitute the Hostfs
+	implementation with a proper one for the UML purpose: when you
+	manage files with Hostfs within UML you need to work with
+	two different permission layers (the Host one and the UML one),
+	which have different ideas of ownerships.</para>
+	<para>This becomes evident when you need to
+	create a file as a non-root user on UML: you first need to interact
+	with the UML file system implementation, and then with the host side.</para>
+	<para>The result of a file creation on a mounted hostfs file system
+	is not what you expected: you can see that the file permissions refer to
+	the Host side user rather than the UML creator.</para>
+	<para>The Host side user is to be intended as the UML instance
+	launcher, meanwhile the UML side user is the one you used to log in
+	the UML instance.</para>
+	<para>You can encounter a more-critical problem when creating a
+	device node, operation that usually requires root privileges: you
+	used a common user to launch the UML and, since the operation is
+	done on the Host, it fails, even if you logged in as root.</para>
+	<para>Thus you need a set of tools which requires to bypass the
+	Hostfs permission checks on the Host side: this is done by
+	separating the file permissions and the ownership from the host's
+	files. This is the concept behind the HumFs and its &dhpackage;
+	implementation.</para>
+  </refsect1>
+  <refsect1>
+    <title>ARGUMENTS</title>
+
+    <variablelist>
+      <varlistentry>
+        <term><option>user</option></term>
+        <listitem>
+          <para>This is the user that needs to 'convert' a directory to the UML
+			file system to use UML.  This is the host user who
+            will be using this filesystem from within UML.  It
+            may be specified as either a user name or a numeric
+            user id.</para>
+        </listitem>
+		</varlistentry>
+		<varlistentry>
+        <term><option>group</option></term>
+        <listitem>
+			<para>This is the group which your UML user belongs to.
+            This may be either a group name or a numeric group id</para>
+        </listitem>
+		</varlistentry>
+		<varlistentry>
+        <term><option>size</option></term>
+        <listitem>
+          <para>This is the size of the file system as seen within the
+		  	UML instance. It must be expressed in Gigabytes ("G"),
+			Megabytes ("M"), or KiloBytes ("K").</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </refsect1>
+
+  <refsect1>
+    <title>EXAMPLES</title>
+	<para>Create a directory on the host and mount it with &dhpackage;</para>
+	<para>host% <command>mkdir your-humfs-dir</command></para>
+	<para>host% <command>cd humfs-dir</command></para>
+
+	<para>Within this directory create a new one where you would like to have
+	a UML-like hierarchy, i.e. you can loop-mount an UML rootfs</para>
+	<para>host% <command>mkdir dir-to-be-humsified</command></para>
+	<para>host# <command>mount -o loop rootfs /mnt</command></para>
+	<para>host% <command>cp -a /mnt dir-to-be-humsified/data</command></para>
+	<para>host# <command>&dhpackage; user group 512M</command></para>
+	
+	<para>Then verify it on UML and mount the humfsified
+	directory:</para>
+	<para>UML# <command>mount none /your-uml-host -t humfs -o
+	.../dir-to-be-humfsified</command></para>
+	<para>where '/your-uml-mount-point' is the mount point on UML for
+	the humfsified file system, and .../dir-to-be-humfsified is 
+    the humfsified directory in the example above. The '-t' mount option 
+    specifies that the file system is to be mounted as 'humfs'.</para>
+  </refsect1>
+
+  <refsect1>
+    <title>SEE ALSO</title>
+
+    <para>The <ulink
+    url="http://user-mode-linux.sourceforge.net/new/hostfs.html"
+    type=alternate>HostFs</ulink> usage explanation within the
+	User-Mode-Linux Web Site</para>
+  </refsect1>
+  <refsect1>
+    <title>AUTHOR</title>
+
+    <para>&dhpackage; was written by Jeff Dike.</para>
+
+    <para>This manual page was written by &dhusername; &dhemail; for
+      the &debian; system, based on material in the Official User Mode
+	  Linux Web Site.</para>
+
+  </refsect1>
+</refentry>
+
+<!-- Keep this comment at the end of the file
+Local variables:
+mode: sgml
+sgml-omittag:t
+sgml-shorttag:t
+sgml-minimize-attributes:nil
+sgml-always-quote-attributes:t
+sgml-indent-step:2
+sgml-indent-data:t
+sgml-parent-document:nil
+sgml-default-dtd-file:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+-->

@@ -1,0 +1,284 @@
+<!doctype refentry PUBLIC "-//OASIS//DTD DocBook V4.1//EN" [
+
+<!-- Process this file with docbook-to-man to generate an nroff manual
+     page: `docbook-to-man manpage.sgml > manpage.1'.  You may view
+     the manual page with: `docbook-to-man manpage.sgml | nroff -man |
+     less'.  A typical entry in a Makefile or Makefile.am is:
+
+manpage.1: manpage.sgml
+	docbook-to-man $< > $@
+  -->
+
+  <!-- Fill in your name for FIRSTNAME and SURNAME. -->
+  <!ENTITY dhfirstname "<firstname>Matt</firstname>">
+  <!ENTITY dhsurname   "<surname>Zimmerman</surname>">
+  <!-- Please adjust the date whenever revising the manpage. -->
+  <!ENTITY dhdate      "<date>December  5, 2001</date>">
+  <!-- SECTION should be 1-8, maybe w/ subsection other parameters are
+       allowed: see man(7), man(1). -->
+  <!ENTITY dhsection   "<manvolnum>1</manvolnum>">
+  <!ENTITY dhemail     "<email>mdz@debian.org</email>">
+  <!ENTITY dhusername  "Matt Zimmerman">
+  <!ENTITY dhucpackage "<refentrytitle>UML_MCONSOLE</refentrytitle>">
+  <!ENTITY dhpackage   "uml_mconsole">
+
+  <!ENTITY debian      "<productname>Debian GNU/Linux</productname>">
+  <!ENTITY gnu         "<acronym>GNU</acronym>">
+]>
+
+<refentry>
+  <refentryinfo>
+    <address>
+      &dhemail;
+    </address>
+    <author>
+      &dhfirstname;
+      &dhsurname;
+    </author>
+    <copyright>
+      <year>2001</year>
+      <holder>&dhusername;</holder>
+    </copyright>
+    &dhdate;
+  </refentryinfo>
+  <refmeta>
+    &dhucpackage;
+
+    &dhsection;
+  </refmeta>
+  <refnamediv>
+    <refname>&dhpackage;</refname>
+
+    <refpurpose>attach to the management console of a user-mode Linux
+    kernel</refpurpose>
+  </refnamediv>
+  <refsynopsisdiv>
+    <cmdsynopsis>
+      <command>&dhpackage;</command>
+
+      <arg><replaceable>socket</replaceable></arg>
+
+      <arg choice=opt rep=repeat><replaceable>command</replaceable></arg>
+
+    </cmdsynopsis>
+  </refsynopsisdiv>
+  <refsect1>
+    <title>DESCRIPTION</title>
+
+    <para>This manual page documents briefly the
+      <command>&dhpackage;</command> command.</para>
+
+    <para>This manual page was written for the &debian; distribution
+      because the original program does not have a manual page.</para>
+
+    <para><command>&dhpackage;</command> is a program to connect to
+    the management console of a user-mode Linux kernel.  The UML
+    management console is a low-level interface to the kernel,
+    somewhat like the i386 SysRq interface. Since there is a
+    full-blown operating system under UML, there is much greater
+    flexibility possible than with the SysRq mechanism.</para>
+
+  </refsect1>
+  <refsect1>
+    <title>OPTIONS</title>
+
+    <variablelist>
+      <varlistentry>
+        <term><replaceable>socket</replaceable></term>
+        <listitem>
+          <para>The pathname of the socket to which to connect.  This
+          is printed when UML boots, for example:
+          <screen>
+            mconsole initialized on /tmp/umlNJ32yL/mconsole
+          </screen>
+          </para>
+
+          <para>In this example, you would start uml_mconsole like
+          this:
+            <screen>
+              <userinput>uml_mconsole umlNJ32yL</userinput>
+            </screen>
+          </para>
+        </listitem>
+      </varlistentry>
+      <varlistentry>
+        <term><replaceable>command</replaceable></term>
+        <listitem>
+          <para>Any of the commands listed in the
+          &ldquo;COMMANDS&rdquo; section.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+  </refsect1>
+
+  <refsect1>
+    <title>COMMANDS</title>
+
+    <variablelist>
+      <varlistentry>
+        <term>version</term>
+        <listitem>
+          <para>Prints the UML version number.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>halt</term>
+        <listitem>
+          <para>Shuts down the UML system immediately, without syncing
+          disks or cleanly shutting down swap space.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>reboot</term>
+        <listitem>
+          <para>Reboots the UML system immediately, without syncing
+          disks or cleanly shutting down swap space.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>log <replaceable>string</replaceable></term>
+        <listitem>
+          <para>Cause UML to log <replaceable>string</replaceable> to
+          the kernel log.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>cad</term>
+        <listitem>
+          <para>Invokes the Control-Alt-Delete handler.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>sysrq <replaceable>letter</replaceable></term>
+        <listitem>
+          <para>Performs the SysRq action controlled by
+          <replaceable>letter</replaceable>.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>stop</term>
+        <listitem>
+          <para>Pauses UML.  UML will do nothing until the 'go'
+          command is issued.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>go</term>
+        <listitem>
+          <para>Resumes execution after a 'stop' command.</para>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>config <option><replaceable>device</replaceable></option></term>
+        <listitem>
+          <para>Adds a new device to the virtual machine, or queries
+          the configuration of an existing device.  It takes one
+          argument, which is either the device to add, with the same
+          syntax as the kernel command line, or the name of an
+          existing device.  For example:</para>
+
+            <informalexample>
+              <screen>
+<prompt>(mconsole)</prompt> <userinput>config ubd3=root_fs_debian22</userinput>
+
+OK
+              </screen>
+            </informalexample>
+
+            <informalexample>
+              <screen>
+<prompt>(mconsole)</prompt> <userinput>config ubd3</userinput>
+
+OK root_fs_debian22
+              </screen>
+            </informalexample>
+
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+    <variablelist>
+      <varlistentry>
+        <term>remove</term>
+        <listitem>
+          <para>Deletes a device from the virtual machine.  Its
+          argument is the name of the device to be removed.  In the
+          case of the ubd driver, the removed block device must not be
+          mounted, swapped on, or otherwise open, and in the case of
+          the network driver, the device must be down.</para>
+
+          <informalexample>
+            <screen>
+<prompt>(mconsole)</prompt> <userinput>remove ubd3</userinput>
+
+OK
+              </screen>
+          </informalexample>
+        </listitem>
+      </varlistentry>
+    </variablelist>
+
+  </refsect1>
+  
+  <refsect1>
+    <title>SEE ALSO</title>
+
+    <para>linux(1)</para>
+
+    <para>The <ulink
+    url="http://user-mode-linux.sourceforge.net/UserModeLinux-HOWTO.html"
+    type=alternate>UserModeLinux-HOWTO</ulink></para>
+  </refsect1>
+  <refsect1>
+    <title>AUTHOR</title>
+
+    <para>&dhpackage; was written by Jeff Dike and others.</para>
+
+    <para>This manual page was written by &dhusername; &dhemail; for
+      the &debian; system, based on material in the
+      UserModeLinux-HOWTO by Rusty Russell, and the uml_mconsole
+      source code.</para>
+
+  </refsect1>
+</refentry>
+
+<!-- Keep this comment at the end of the file
+Local variables:
+mode: sgml
+sgml-omittag:t
+sgml-shorttag:t
+sgml-minimize-attributes:nil
+sgml-always-quote-attributes:t
+sgml-indent-step:2
+sgml-indent-data:t
+sgml-parent-document:nil
+sgml-default-dtd-file:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+-->
